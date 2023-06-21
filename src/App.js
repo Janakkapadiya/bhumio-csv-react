@@ -145,38 +145,52 @@ const App = () => {
       <FormControl>
         <Table
           sx={{
-            border: 1,
-            minWidth: 650,
+            border: 2,
+            // minWidth: 250,
             marginLeft: "6px",
-            marginRight: "1px",
+            marginRight: "95px",
           }}
           aria-label="a dense table"
         >
           <TableHead>
             <TableRow>
               {tableRows.map((row, index) => (
-                <TableCell
-                  // className="border-b-2 text-left p-2"
-                  sx={{ border: "black", padding: "2px", textAlign: "center" }}
-                  key={index}
-                >
-                  {row}
-                </TableCell>
+                <TableCell key={index}>{row}</TableCell>
               ))}
             </TableRow>
           </TableHead>
           <TableBody>
             {values.map((value, index) => (
-              <TableRow className="even:bg-slate-200" key={index}>
+              <TableRow
+                sx={{
+                  "&:nth-child(even)": {
+                    backgroundColor: "lightgray",
+                  },
+                }}
+                key={index}
+              >
                 {Object.values(value).map((val, i) => (
-                  <TableCell className="border-b-2 text-left p-2" key={i}>
+                  <TableCell
+                    sx={{
+                      textAlign: "left",
+                      borderLeft: 0,
+                      borderRight: 0,
+                      borderTop: 1,
+                      borderBottom: 1,
+                    }}
+                    key={i}
+                  >
                     {val}
                   </TableCell>
                 ))}
                 <Button
                   variant="contained"
                   color="secondary"
-                  className="ml-4 rounded-sm text-center inline-block justify-center mt-2"
+                  style={{
+                    marginLeft: "4px",
+                    borderRadius: "5px",
+                    marginTop: "10px",
+                  }}
                   onClick={(e) => handleDelete(index, e)}
                 >
                   Delete
