@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Papa from "papaparse";
-import { TextField, Button, Input, FormControl } from "@material-ui/core";
+import {
+  TextField,
+  Button,
+  Input,
+  FormControl,
+  Dialog,
+} from "@material-ui/core";
 import { Box } from "@mui/system";
 import {
   TableRow,
@@ -10,6 +16,7 @@ import {
   TableCell,
 } from "@mui/material";
 import CustomInventoryPopUp from "./components/CustomInventoryPopUp";
+import { CSVLink } from "react-csv";
 
 const App = () => {
   const [parsedData, setParsedData] = useState([]);
@@ -29,7 +36,6 @@ const App = () => {
 
         setParsedData(valuesArray);
         setTableRows(rowsArray);
-        console.log(valuesArray);
       },
     });
   };
@@ -134,12 +140,26 @@ const App = () => {
         >
           Update Inventory
         </Button>
+        <Button
+          variant="contained"
+          color="primary"
+          style={{ marginLeft: "10px" }}
+        >
+          <CSVLink data={values} filename={"inventory.csv"} target="_blank">
+            Export CSV
+          </CSVLink>
+        </Button>
         {error && (
-          <div
-            style={{ color: "red", display: "flex", justifyContent: "center" }}
+          <Box
+            sx={{
+              color: "red",
+              display: "block",
+              textAlign: "center",
+              marginTop: "10px",
+            }}
           >
             {error}
-          </div>
+          </Box>
         )}
       </Box>
       <FormControl>
